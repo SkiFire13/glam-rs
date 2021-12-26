@@ -15,6 +15,8 @@ pub union Vec4Cast {
     pub m128: __m128,
     #[cfg(target_feature = "simd128")]
     pub v128: v128,
+    #[cfg(all(feature = "std-simd", not(feature = "scalar-math")))]
+    pub f32x4: std::simd::f32x4,
     pub fx4: [f32; 4],
     pub fx2x2: [[f32; 2]; 2],
     pub v4: Vec4,
@@ -126,6 +128,8 @@ pub union IVec4Cast {
     pub m128: __m128i,
     #[cfg(target_feature = "simd128")]
     pub v128: v128,
+    #[cfg(all(feature = "std-simd", not(feature = "scalar-math")))]
+    pub mask32x4: std::simd::mask32x4,
     pub ix4: [i32; 4],
     pub ix2x2: [[i32; 2]; 2],
     pub v4: IVec4,

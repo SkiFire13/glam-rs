@@ -1029,7 +1029,10 @@ mod vec4 {
         }
     });
 
-    #[cfg(all(target_feature = "sse2", not(feature = "scalar-math")))]
+    #[cfg(all(
+        target_feature = "sse2",
+        not(any(feature = "scalar-math", feature = "std-simd"))
+    ))]
     #[test]
     fn test_m128() {
         #[cfg(target_arch = "x86")]

@@ -12,7 +12,15 @@ pub mod storage;
 pub mod traits;
 
 mod scalar;
-#[cfg(all(target_feature = "sse2", not(feature = "scalar-math")))]
+#[cfg(all(
+    target_feature = "sse2",
+    not(any(feature = "scalar-math", feature = "std-simd"))
+))]
 mod sse2;
-#[cfg(all(target_feature = "simd128", not(feature = "scalar-math")))]
+#[cfg(all(feature = "std-simd", not(feature = "scalar-math")))]
+mod std_simd;
+#[cfg(all(
+    target_feature = "simd128",
+    not(any(feature = "scalar-math", feature = "std-simd"))
+))]
 mod wasm32;
