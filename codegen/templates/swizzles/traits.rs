@@ -41,28 +41,6 @@
         }
         {% endif %}
 
-        {#
-        {% for e0 in components | slice(end=size) %}
-            {% for e1 in components | slice(end=size) %}
-                {% set skip = size == 2 and e0 == "x" and e1 == "y" %}
-                {% if not skip %}
-                    fn {{e0}}{{e1}}(self) -> {{ret2}};
-                {% endif %}
-            {% endfor %}
-        {% endfor %}
-
-        {% for e0 in components | slice(end=size) %}
-            {% for e1 in components | slice(end=size) %}
-                {% for e2 in components | slice(end=size) %}
-                    {% set skip = size == 3 and e0 == "x" and e1 == "y" and e2 == "y" %}
-                    {% if not skip %}
-                        fn {{e0}}{{e1}}{{e2}}(self) -> {{ret3}};
-                    {% endif %}
-                {% endfor %}
-            {% endfor %}
-        {% endfor %}
-        #}
-
         {% for i in dimensions %}
             {% for e0 in components | slice(end=size) %}
                 {% for e1 in components | slice(end=size) %}
@@ -74,13 +52,13 @@
                     {% else %}
                         {% for e2 in components | slice(end=size) %}
                             {% if i == 3 %}
-                                {% set skip = size == 3 and e0 == "x" and e1 == "y" and e2 == "y" %}
+                                {% set skip = size == 3 and e0 == "x" and e1 == "y" and e2 == "z" %}
                                 {% if not skip %}
                                     fn {{e0}}{{e1}}{{e2}}(self) -> {{ret3}};
                                 {% endif %}
                             {% else %}
                                 {% for e3 in components | slice(end=size) %}
-                                    {% set skip = size == 4 and e0 == "x" and e1 == "y" and e2 == "y" and e3 == "z" %}
+                                    {% set skip = size == 4 and e0 == "x" and e1 == "y" and e2 == "z" and e3 == "w" %}
                                     {% if not skip %}
                                         fn {{e0}}{{e1}}{{e2}}{{e3}}(self) -> {{ret4}};
                                     {% endif %}
